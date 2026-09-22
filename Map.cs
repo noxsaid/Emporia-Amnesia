@@ -1,42 +1,42 @@
 class Map
 {
-    private Location?[][] locaitons =
+  private Location?[][] locations =
+  {
+    new Location?[5] {null,               null,               new Escallator1(),         new Roof(),           null},
+    new Location?[5] {new Foyer(),        new Escalator2(),   new CorridorA(),          null,                 null},
+    new Location?[5] {new ToiletStall(),  null,               new OutSideDryCleaner(),  new CorridorB(),      null},
+    new Location?[5] {null,               null,               new Drycleaner(),         new Securityoffice(), new TaxtSation()}
+  };
+
+
+
+  public Location GetLocation(int row, int col)
+  {
+    return locations[row][col]!; // ! assertion, we promise this will exist
+  }
+
+
+  public bool PositionExists(int row, int col)
+  {
+
+    if (row < 0 || row >= locations.Length) // is row out of bounds?
     {
-        new Location?[5] {null,              null,              new Escallator1(),       new Roof(),           null},
-        new Location?[5] {new Foyer(),       new Escallator2(), new CorridorA(),         null,                 null},
-        new Location?[5] {new TolietStall(), null,              new OutSideDryCleaner(), new CorridorB(),      null},
-        new Location?[5] {null,              null,              new Drycleaner(),        new Securityoffice(), new TaxtSation()}
-    };
-
-
-
-    public Location GetLocation(int row, int col)
-    {
-        return locaitons[row][col]!; // assertion, we promis this will exist
+      return false;
     }
 
-
-
-    public bool PositionExsists(int row, int col)
+    if (col < 0 || col >= locations[row].Length) // is col out of bounds?
     {
-        if(row < 0 || row >= locaitons.Length) // is row out of bounds?
-        {
-            return false;
-        }
-
-        if (col < 0 || col >= locaitons[row].Length) // is row out of bounds?
-        {
-            return false;
-        }
-
-        if (locaitons[row][col] == null) // is postion on a null"Cell"?
-        {
-            return false;
-        }
-
-        return true;
-
+      return false;
     }
+
+    if (locations[row][col] == null) // is position on a null "cell"?
+    {
+      return false;
+    }
+
+    return true;
+
+  }
 
 
 

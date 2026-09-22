@@ -1,10 +1,13 @@
-class TolietStall : Location
+class ToiletStall : Location
 {
-    
-    public TolietStall()
-    {
-        Name = "Toalettboås";
-        Description = "Jag vaknar upp i ett toaletbås, bredvid en tom spritflaska. AJ! Jag skulle... jag eh... kommer inte riktig ihåg.. Jag har en ryggsäck på mig... ";
-    }
+
+  public ToiletStall()
+  {
+    Name = "Toalettbås";
+    Description = "Jag vaknar upp i ett toalettbås, bredvid en tom spritflaska. Aj! Jag skulle... jag eh.. kommer inte riktigt ihåg... Jag har en ryggsäck på mig... ";
+    Directions = ["Norr"];
+  }
+
+
 
 }
