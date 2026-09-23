@@ -1,6 +1,10 @@
 class Game
 {
 
+  // isDev allows you to teleport where you want anytime
+  // set to false before shipping to normal customers
+  bool isDev = true;
+
   bool isRunning = true;
   Map map = new();
   Player player = new(2, 0);
@@ -8,6 +12,9 @@ class Game
 
   public void Start()
   {
+
+    player.Backpack.Add(new Item("pengar", "25000 kronor, najs..."));
+    player.Backpack.Add(new Item("kvitto", "ett kvitto från kemtvätten här på Emporia för min frack"));
     Console.WriteLine("EMPORIA AMNESIA");
     while (isRunning)
     {
@@ -55,14 +62,21 @@ class Game
     Console.WriteLine($"\n=== {location.Name} ===");
     Console.WriteLine(location.Description);
 
-    int choice = menu.Ask("Vad vill du göra?", [
+    List<string> menuItems = [
         "Förflytta dig",
         "Undersök platsen",
         "Ta ett föremål",
         "Interagera",
         "Titta i ryggsäcken",
         "Avsluta spelet"
-    ]);
+    ];
+
+    if (isDev)
+    {
+      menuItems.Add("DEV: Teleport");
+    }
+
+    int choice = menu.Ask("Vad vill du göra?", menuItems);
 
     switch (choice)
     {
@@ -85,6 +99,10 @@ class Game
         isRunning = false; // stop game loop and exit
         Console.WriteLine("Spelet avslutas.");
         break;
+      case 7:
+        Console.Write("\nAnge klassnamn för location: ");
+        player.Teleport(Console.ReadLine()!);
+        break;
     }
   }
 
@@ -92,7 +110,7 @@ class Game
   void ChooseDirection()
   {
     Direction[] directions = CurrentLocation().Directions;
-    if (directions.Length == 0)
+    if (directions.Length == 0 || directions.Contains(Direction.None))
     {
       Console.WriteLine("Det finns ingen väg härifrån.");
       return;
