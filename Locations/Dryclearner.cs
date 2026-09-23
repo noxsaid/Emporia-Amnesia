@@ -1,4 +1,4 @@
-class Drycleaner : Location
+class DryCleaner : Location
 {
-    
+
 }

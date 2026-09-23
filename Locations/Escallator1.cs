@@ -1,4 +1,4 @@
-class Escallator1 : Location
+class Escalator1 : Location
 {
-    
+
 }

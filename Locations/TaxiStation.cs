@@ -1,4 +1,4 @@
-class TaxtSation : Location
+class TaxiStation : Location
 {
-    
+
 }

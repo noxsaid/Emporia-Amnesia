@@ -1,4 +1,4 @@
 class CorridorB : Location
 {
-    
+
 }
